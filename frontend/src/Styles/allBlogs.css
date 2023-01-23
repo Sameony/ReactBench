@@ -1,0 +1,36 @@
+#blogCard{
+    width: 80vw;
+    border-radius: 10px;
+    margin: 2rem auto;
+    padding: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    transition: all ease-in-out 0.5s;
+}
+#blogCard:hover{
+    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 12px 25px 0 rgba(0, 0, 0, 0.19);   
+}
+.titleHead{
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.subHead{
+    font-size: small;
+    margin-bottom: 1rem;
+}
+
+.contentBrief{
+    color: rgb(164, 164, 164);
+    margin-bottom: 1rem;
+}
+.categoryBlock{
+    background-color: rgb(164, 164, 164);
+    border-radius: 15px;
+    display: inline;
+    padding: 0.3rem 0.7rem;
+    margin-bottom: 1rem;
+}
