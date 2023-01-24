@@ -1,6 +1,6 @@
 import React from 'react'
 import "../Styles/allBlogs.css"
-
+import { Link } from 'react-router-dom'
 const blogs = [
     {Title:"title1",
     Category:"category",
@@ -53,8 +53,8 @@ const AllBlogs = () => {
             <div>{ele.isLiked}</div>
             <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                 <div className="categoryBlock">{ele.Category} </div>
-                <button className='btn btn-primary'>Read More</button>
-            </div>
+                <Link to={`/blogs/${index}`} className='btn btn-primary'>Read More</Link>
+            </div>  
         </div>
     })
   )
