@@ -3,6 +3,7 @@ const PORT = process.env.port || 3001;
 const app = express();
 const dbconn = require("./src/config/db")
 const bodyParser = require("body-parser");
+const cors = require('cors')
 const Blog = require("./src/model/Blog");
 const  {addBlog, addToFav, removeBlog, updateBlog, fetchAllBlogs} = require("./src/controllers/blogController")
 dbconn();
@@ -10,6 +11,7 @@ dbconn();
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cors())
 
 
 //listen

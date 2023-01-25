@@ -1,51 +1,32 @@
-import React from 'react'
+import React , {useEffect, useState} from 'react'
 import "../Styles/allBlogs.css"
 import { Link } from 'react-router-dom'
-const blogs = [
-    {Title:"title1",
-    Category:"category",
-    Content:"Lorem ipsum dolor",
-    isLiked:true,
-    Author:"Author",
-    Time: "22 Jan, 2023"
-    },
-    {Title:"title1",
-    Category:"category",
-    Content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    isLiked:false,
-    Author:"Author",
-    Time:"23 Jan, 2023"
-    },
-    {Title:"title1",
-    Category:"category",
-    Content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    isLiked:false,
-    Author:"Author",
-    Time:"23 Jan, 2023"
-    },
-    {Title:"title1",
-    Category:"category",
-    Content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    isLiked:false,
-    Author:"Author",
-    Time:"23 Jan, 2023"
-    },
-    {Title:"title1",
-    Category:"category",
-    Content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    isLiked:false,
-    Author:"Author",
-    Time:"23 Jan, 2023"
+import axios from 'axios'
+const AllBlogs = () => {
+    const pathname = "http://localhost:3001"
+    const [blogs, setBlogs]=useState([])
+    useEffect(() => {
+        getData()
+       }, [])
+
+
+       const getData = async() =>{
+           await axios.post(pathname+"/fetchAllBlogs").then((response)=>{
+               setBlogs(response.data.data)
+           })
+       }
+       const likeBlog = async(blogId) =>{
+        await axios.post(pathname+"/addToFav",{id:blogId})
+        await getData();
     }
 
-]
-const AllBlogs = () => {
   return (
     blogs.map((ele, index)=>{
         return <div key={index} id="blogCard" title={"Read more about "+ele.Title} >
             <div className="titleHead">
                 {ele.Title}
-                <i style={ele.isLiked?{color:"red", fontWeight:"900", cursor:"pointer"}:{color:"red", cursor:"pointer"}} className="fa-regular fa-heart"></i>
+                <i style={ele.Likes?{color:"red", fontWeight:"900", cursor:"pointer"}:{color:"red", cursor:"pointer"}}
+                 className="fa-regular fa-heart" onClick={()=>likeBlog(ele._id)}></i>
                 </div>
             <div className="subHead">{ele.Author}{ele.Time}</div>
             

@@ -6,6 +6,7 @@ const Blog = mongoose.Schema({
     Likes:{type:Number, default:0},
     Category:{ type:String, default:"Miscellaneous"},
     Content:{ type:String, required:true},
+    Author:{type:String, required:true}
 
 }, {timestamps:true})
 

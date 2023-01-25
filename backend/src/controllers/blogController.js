@@ -1,11 +1,11 @@
 
 const Blog = require("../model/Blog")
 
-const addBlog = async ({Title, Likes, Content, Category}) =>{
+const addBlog = async ({Title,Author, Likes, Content, Category}) =>{
     try{
         if(!Title || !Content)
             throw "incomplete arguments"
-        let response = Category?await Blog.create({Title,Category, Content }):await Blog.create({Title, Content })
+        let response = Category?await Blog.create({Title,Author,Category, Content }):await Blog.create({Title,Author, Content })
         if(!response)
             throw "Something went wrong. Please try again later"
         else
