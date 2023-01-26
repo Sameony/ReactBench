@@ -60,7 +60,7 @@ const AllBlogs = () => {
                     </div>  
                     </div>
                     <div className="delete" onClick={()=>removeBlogHandler(ele._id, index)}>
-                    <i class="fa-solid fa-trash"></i>
+                    <i className="fa-solid fa-trash"></i>
                     </div>
         </div>
     })

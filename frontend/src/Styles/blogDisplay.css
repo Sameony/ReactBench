@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@700&family=Cinzel:wght@500&display=swap');
+
+
+
+
+body {
+    margin: 1rem auto;
+    max-width: 70vw;
+    min-width: 20rem;
+    background-image: url("../../public/bg.jpg");
+    background-size: cover;
+    
+}
+
+.scroll {
+    background-color: white;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.header {
+    color: rgb(47, 123, 221);
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+
+.left div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.right {
+    font-size: 2rem;
+}
+
+.right i {
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.midHead {
+    color: orangered;
+    font-size: xx-large;
+}
+
+.smolHead {
+    color: rgb(218, 171, 40);
+    font-weight: bold;
+}
+
+.smallify {
+    font-size: small;
+}
+
+.content {
+    padding: 1rem;
+    font-family: 'Arima Madurai', cursive;
+    font-size: large;
+
+}
+
+.splitscreen {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    color: rgb(0, 0, 0);
+
+}
+
+.my-co {
+    max-height: 40px;
+    margin-left: 5rem;
+    border-radius: 2.3rem;
+}
+
+.mini-ico {
+    max-width: 40px;
+    margin-left: 1rem;
+}
+
+.my-name {
+    margin-left: 0.8rem;
+    text-align: center;
+    font-size: small;
+    font-weight: bold;
+}
+
+.date {
+    margin-top: 0.2rem;
+    font-size: smaller;
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+hr {
+    background: rgb(47, 123, 221);
+    height: 3px;
+    margin: 0 4rem;
+
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h1,
+h2 {
+    padding: 1rem;
+}
+
+.container {
+    text-align: center;
+}
+
+
+
+
+
+.catto {
+    max-width: 65vw;
+    padding: 1rem 0;
+    display: block;
+    margin: auto;
+}
+
+.theMan {
+    max-width: 70vw;
+    display: block;
+    margin: auto;
+    padding: 2rem 0;
+}
+
+
+.footer {
+    text-align: center;
+    background-color: white;
+
+}
+
+.footer-header {
+    font-size: large;
+    font-weight: bold;
+    color: rgb(47, 123, 221);
+}
+
+.footer ul {
+    padding-inline-start: 0px;
+    color: white;
+
+}
+
+.list-non-bullet {
+    list-style: none;
+}
+
+.list-item-inline {
+    display: inline;
+    padding: 1rem 2rem;
+}
+
+
+.quote {
+    font-size: x-large;
+    color: rgb(63, 92, 218);
+    text-align: center;
+    display: block;
+}
