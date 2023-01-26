@@ -17,9 +17,11 @@ const AllBlogs = () => {
                setBlogs(response.data.data)
            })
        }
-       const likeBlog = async(blogId) =>{
-        await axios.post(pathname+"/addToFav",{id:blogId})
+       const likeBlog = async(blog,e) =>{
+        e.stopPropagation();
+        await axios.post(pathname+"/addToFav",{id:blog._id})
         await getData();
+        blog.Likes?e.target.style.transform="rotateY(180deg)":e.target.style.transform="rotateY(0deg)"
     }
     const removeBlogHandler = async(id, index) =>{
         let choice = window.confirm("Are you sure you want to remove this blog? This cannot be undone.")
@@ -45,8 +47,8 @@ const AllBlogs = () => {
                     onClick={()=>{setMovedIndex(index===movedIndex?-1:index)}} >
                     <div className="titleHead">
                         {ele.Title}
-                        <i style={ele.Likes?{color:"red", fontWeight:"900", cursor:"pointer"}:{color:"red", cursor:"pointer"}}
-                        className="fa-regular fa-heart" onClick={()=>likeBlog(ele._id)}></i>
+                        <i style={ele.Likes?{transition:"all ease 0.7s",color:"red", fontWeight:"900", cursor:"pointer"}:{transition:"all ease 0.7s",color:"red", cursor:"pointer"}}
+                        className="fa-regular fa-heart" onClick={(e)=>likeBlog(ele,e)}></i>
                         </div>
                     <div className="subHead">{ele.Author}{ele.Time}</div>
                     
