@@ -5,7 +5,7 @@ const dbconn = require("./src/config/db")
 const bodyParser = require("body-parser");
 const cors = require('cors')
 const Blog = require("./src/model/Blog");
-const  {addBlog, addToFav, removeBlog, updateBlog, fetchAllBlogs} = require("./src/controllers/blogController")
+const  {addBlog, addToFav, removeBlog, updateBlog, fetchAllBlogs, fetchBlogById} = require("./src/controllers/blogController")
 dbconn();
 
 app.use(express.json())
@@ -76,6 +76,17 @@ app.post("/addToFav",async(req,res,next)=>{
         res.status(400).send(result)
     }
 
+})
+app.post("/fetchBlogById", async(req,res,next)=>{
+    let result  = await fetchBlogById(req.body)
+    if(result.data)
+    {
+        res.status(200).send(result)
+    }
+    else
+    {
+        res.status(400).send(result)
+    }
 })
 
 const server = app.listen(PORT, () =>{

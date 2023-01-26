@@ -82,5 +82,19 @@ const addToFav = async ({id}) =>{
     }
 }
 
-
-module.exports = {addBlog, addToFav, removeBlog, updateBlog, fetchAllBlogs}
+const fetchBlogById = async ({id}) =>{
+try{
+    let response = await Blog.findById({_id:id})
+   
+    if(!response)
+        throw "Blog not found"
+    else
+    {
+        return {msg:"Blog fetched successfully", data:response}
+    }
+}catch(error)
+{
+    return {data:null, msg:error}
+}
+}
+module.exports = {addBlog, addToFav, removeBlog, updateBlog, fetchAllBlogs, fetchBlogById}
