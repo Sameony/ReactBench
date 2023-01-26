@@ -23,7 +23,7 @@ const AllBlogs = () => {
         await getData();
         blog.Likes?e.target.style.transform="rotateY(180deg)":e.target.style.transform="rotateY(0deg)"
     }
-    const removeBlogHandler = async(id, index) =>{
+        const removeBlogHandler = async(id, index) =>{
         let choice = window.confirm("Are you sure you want to remove this blog? This cannot be undone.")
         if(choice)
         {
@@ -56,7 +56,7 @@ const AllBlogs = () => {
                     <div>{ele.isLiked}</div>
                     <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
                         <div className="categoryBlock">{ele.Category} </div>
-                        <Link to={`/blogs/${index}`} className='btn btn-primary'>Read More</Link>
+                        <Link to={`/blogs/${ele._id}`} className='btn btn-primary'>Read More</Link>
                     </div>  
                     </div>
                     <div className="delete" onClick={()=>removeBlogHandler(ele._id, index)}>

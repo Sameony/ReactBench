@@ -4,9 +4,8 @@ import './index.css';
 import App from './App';
 import Header from './Components/Header';
 import BlogDisplay from './Screens/BlogDisplay';
-import Footer from './Components/Footer';
 import {Route, Routes, BrowserRouter} from "react-router-dom";
-import BlogPage from './Screens/BlogPage';
+import AddBlog from './Screens/AddBlog';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,8 +14,8 @@ root.render(
       <Header />
       <Routes>
         <Route path='/' element={<App/>}></Route>
-        <Route path="/addBlog" element={<BlogPage />} />
-        <Route path="/blogs/:blogName" element={<BlogDisplay />} />
+        <Route path="/addBlog" element={<AddBlog />} />
+        <Route path="/blogs/:blogID" element={<BlogDisplay />} />
       </Routes>
   
     </BrowserRouter>

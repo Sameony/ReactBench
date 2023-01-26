@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-const BlogPage = () => {
+const AddBlog = () => {
   const [blogObj, setBlogObj] = useState({Author:"", Content:"",Category:'', Title:""})
-  const [error,setError] = useState("")
+  const [error,setError] = useState("") 
   const [success,setSuccess] = useState("")
   const changeHandler = (e) =>{
     let ename = e.target.name;
@@ -54,4 +54,4 @@ const BlogPage = () => {
   )
 }
 
-export default BlogPage
+export default AddBlog
