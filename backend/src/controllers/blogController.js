@@ -15,9 +15,10 @@ const addBlog = async ({Title,Author, Likes, Content, Category}) =>{
         return {data:null, msg:error}
     }
 }
-const removeBlog = async (id) =>{
+const removeBlog = async ({id}) =>{
     try{
-        let response = await Blog.findByIdAndRemove({id})
+        let response = await Blog.findByIdAndRemove({_id:id})
+        console.log(response)
         if(!response)
             throw "Something went wrong. Please try again later"
         else
