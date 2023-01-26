@@ -1,4 +1,4 @@
-import React , {useEffect, useState, useRef} from 'react'
+import React , {useEffect, useState} from 'react'
 import "../Styles/allBlogs.css"
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -6,6 +6,7 @@ const AllBlogs = () => {
     const pathname = "http://localhost:3001"
     const [blogs, setBlogs]=useState([])
     const [movedIndex, setMovedIndex] = useState(-1)
+    const [removeIndex, setRemoveIndex] = useState(-1)
     useEffect(() => {
         getData()
        }, [])
@@ -20,21 +21,26 @@ const AllBlogs = () => {
         await axios.post(pathname+"/addToFav",{id:blogId})
         await getData();
     }
-    const removeBlogHandler = async(id) =>{
+    const removeBlogHandler = async(id, index) =>{
         let choice = window.confirm("Are you sure you want to remove this blog? This cannot be undone.")
         if(choice)
         {
-            await axios.post(pathname+"/removeBlogById",{id}).then(async res=>{
+            await axios.post(pathname+"/removeBlogById",{id}).then(res=>{
                 
-                await getData();
-            })
+            }).catch(err=>console.log(err))
+            setRemoveIndex(index)
+            setTimeout(async() => {
+               await getData();
+               setRemoveIndex(-1)
+               setMovedIndex(-1)
+            }, 1000);
         }
 
     }
 
   return (
     blogs.map((ele, index)=>{
-        return <div key={index} className="blogWrap">
+        return <div key={index} className="blogWrap" style={removeIndex===index?{transform:"translateX(-70rem)"}:{}}>
                     <div id="blogCard" style={movedIndex===index?{transform:"translateX(-7rem)"}:{}} title={"Read more about "+ele.Title} 
                     onClick={()=>{setMovedIndex(index===movedIndex?-1:index)}} >
                     <div className="titleHead">
@@ -51,7 +57,7 @@ const AllBlogs = () => {
                         <Link to={`/blogs/${index}`} className='btn btn-primary'>Read More</Link>
                     </div>  
                     </div>
-                    <div className="delete" onClick={()=>removeBlogHandler(ele._id)}>
+                    <div className="delete" onClick={()=>removeBlogHandler(ele._id, index)}>
                     <i class="fa-solid fa-trash"></i>
                     </div>
         </div>
