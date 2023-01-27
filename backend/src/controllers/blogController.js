@@ -28,11 +28,11 @@ const removeBlog = async ({id}) =>{
         return {data:null, msg:error}
     }
 }
-const updateBlog = async ({id, Title, Likes, Content, Category}) =>{ // ye naam ke parameters merko extract karke do
+const updateBlog = async ({_id, Title, Likes, Content, Category}) =>{ // ye naam ke parameters merko extract karke do
     try{
-        if(!id)
+        if(!_id)
             throw "incomplete arguments"
-        let response = await Blog.findByIdAndUpdate({_id:id},{Title, Likes, Category, Content})
+        let response = await Blog.findByIdAndUpdate({_id:_id},{Title, Likes, Category, Content})
         if(!response)
             throw "Something went wrong. Please try again later"
         else
