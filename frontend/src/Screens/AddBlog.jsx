@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addBlog,updateBlog } from '../Actions'
 const AddBlog = () => {
+  const dispatch = useDispatch()
   const {blogID}=useParams()
   const [blogObj, setBlogObj] = useState({Author:"", Content:"",Category:'', Title:""})
   const [error,setError] = useState("") 
@@ -25,12 +28,14 @@ const AddBlog = () => {
       setSuccess(res.data.msg)
       setError("")
       setBlogObj({Author:"", Content:"",Category:'', Title:""})
+      dispatch(addBlog(blogObj))
     }).catch(err=>{
       setError(err.response.data.msg)
       setSuccess("")
     })
     blogID&&choice&&await axios.post("http://localhost:3001/updateBlog",blogObj).then((res)=>{
       setSuccess(res.data.msg)
+      dispatch(updateBlog(blogObj))
       setError("")
       setBlogObj({Author:"", Content:"",Category:'', Title:""})
     }).catch(err=>{

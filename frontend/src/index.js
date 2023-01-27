@@ -25,7 +25,6 @@ root.render(
           <Route path="/blogs/:blogID" element={<BlogDisplay />} />
           <Route path="/addBlog/:blogID" element={<AddBlog/>} />
         </Routes>
-    
       </BrowserRouter>
    </Provider>
  </React.StrictMode>

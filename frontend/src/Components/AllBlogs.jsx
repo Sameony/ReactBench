@@ -3,7 +3,7 @@ import "../Styles/allBlogs.css"
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { getBlogs } from '../Actions'
+import { setBlog, likeBlogDispatch, removeBlog } from '../Actions'
 const AllBlogs = () => {
     const blog = useSelector(state=>state)
     const dispatch = useDispatch()
@@ -14,24 +14,25 @@ const AllBlogs = () => {
     
     useEffect(()=>{
         getData()
-        dispatch(getBlogs(blog))
-         // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const getData = async() =>{
         await axios.post(pathname+"/fetchAllBlogs").then((response)=>{
             setBlogs(response.data.data)
+            !blog[0]?._id&&dispatch(setBlog(response.data.data))
         })
-       
         
     }
     const likeBlog = async(blog,e) =>{
         e.stopPropagation();
+        dispatch(likeBlogDispatch(blog._id))
         await axios.post(pathname+"/addToFav",{id:blog._id})
         await getData();
         blog.Likes?e.target.style.transform="rotateY(180deg)":e.target.style.transform="rotateY(0deg)"
     }
     
     const removeBlogHandler = async(id, index) =>{
+        dispatch(removeBlog(id))
         let choice = window.confirm("Are you sure you want to remove this blog? This cannot be undone.")
         if(choice)
         {
