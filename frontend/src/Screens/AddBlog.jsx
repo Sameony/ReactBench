@@ -12,7 +12,7 @@ const AddBlog = () => {
       .then(res=>setBlogObj(res.data.data))
       .catch(err=>console.log(err))
     }
-    getBlogData();
+    blogID&&getBlogData();
   },[blogID])
   const changeHandler = (e) =>{
     let ename = e.target.name;

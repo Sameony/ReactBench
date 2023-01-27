@@ -2,28 +2,36 @@ import React , {useEffect, useState} from 'react'
 import "../Styles/allBlogs.css"
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { getBlogs } from '../Actions'
 const AllBlogs = () => {
+    const blog = useSelector(state=>state)
+    const dispatch = useDispatch()
     const pathname = "http://localhost:3001"
     const [blogs, setBlogs]=useState([])
     const [movedIndex, setMovedIndex] = useState(-1)
     const [removeIndex, setRemoveIndex] = useState(-1)
-    useEffect(() => {
+    
+    useEffect(()=>{
         getData()
-       }, [])
-
-
-       const getData = async() =>{
-           await axios.post(pathname+"/fetchAllBlogs").then((response)=>{
-               setBlogs(response.data.data)
-           })
-       }
-       const likeBlog = async(blog,e) =>{
+        dispatch(getBlogs(blog))
+         // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+    const getData = async() =>{
+        await axios.post(pathname+"/fetchAllBlogs").then((response)=>{
+            setBlogs(response.data.data)
+        })
+       
+        
+    }
+    const likeBlog = async(blog,e) =>{
         e.stopPropagation();
         await axios.post(pathname+"/addToFav",{id:blog._id})
         await getData();
         blog.Likes?e.target.style.transform="rotateY(180deg)":e.target.style.transform="rotateY(0deg)"
     }
-        const removeBlogHandler = async(id, index) =>{
+    
+    const removeBlogHandler = async(id, index) =>{
         let choice = window.confirm("Are you sure you want to remove this blog? This cannot be undone.")
         if(choice)
         {
