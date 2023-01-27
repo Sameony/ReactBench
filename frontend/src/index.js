@@ -6,6 +6,28 @@ import Header from './Components/Header';
 import BlogDisplay from './Screens/BlogDisplay';
 import {Route, Routes, BrowserRouter} from "react-router-dom";
 import AddBlog from './Screens/AddBlog';
+import {createStore} from 'redux'
+import { blogReducer } from './reducers';
+
+
+//Store
+const store = createStore(blogReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+//Action
+const getBlogs = () =>{
+  return {
+    type:"GET"
+  }
+}
+const RemoveBlogs = () =>{
+  return {
+    type:"DELETE"
+  }
+}
+  store.subscribe(()=>console.log(store.getState()))
+//dispatch
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
