@@ -29,5 +29,8 @@
 ### Other (Redux and backend):
         i. Currently, Both the Redux and API calls are working side by side. To Observe the Redux state changes, 
            Download and use the Redux web toolkit chrome extension or observe the susbscribed messages in the console.
+Redux extension: 
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/80711125/215100282-9214a639-eb06-47fd-b45f-b55494d12e31.png">
+
         ii. Remove the api calls and replace the `blogs` state with `blog`(state selector of redux) in the application to 
            convert this into purely react redux application
