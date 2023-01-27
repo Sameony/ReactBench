@@ -41,19 +41,30 @@
     padding: 0.3rem 0.7rem;
     margin-bottom: 1rem;
 }
-
+.blogOptions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 8.5rem;
+}
 .delete{
+    transition: all ease 0.5s;
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2.5rem;
     color: white;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 8rem;
     background-color: red;
     cursor: pointer;
     border-radius: 10px;
+}
+.delete:hover{
+    transform: translateX(1rem);
 }

@@ -39,11 +39,10 @@ const AllBlogs = () => {
         }
 
     }
-
   return (
     blogs.map((ele, index)=>{
         return <div key={index} className="blogWrap" style={removeIndex===index?{transform:"translateX(-70rem)"}:{}}>
-                    <div id="blogCard" style={movedIndex===index?{transform:"translateX(-7rem)"}:{}} title={"Read more about "+ele.Title} 
+                    <div id="blogCard" style={movedIndex===index?{transform:"translateX(-7rem)"}:{}} title="Click to see more options" 
                     onClick={()=>{setMovedIndex(index===movedIndex?-1:index)}} >
                     <div className="titleHead">
                         {ele.Title}
@@ -59,8 +58,13 @@ const AllBlogs = () => {
                         <Link to={`/blogs/${ele._id}`} className='btn btn-primary'>Read More</Link>
                     </div>  
                     </div>
-                    <div className="delete" onClick={()=>removeBlogHandler(ele._id, index)}>
-                    <i className="fa-solid fa-trash"></i>
+                    <div className='blogOptions'>
+                        <div className="delete" onClick={()=>removeBlogHandler(ele._id, index)}>
+                            <i className="fa-solid fa-trash"></i>
+                        </div>
+                        <Link to={`/addBlog/${ele._id}`} className="delete" style={{backgroundColor:"#0d6efd"}}>
+                            <i className="fa-solid fa-edit"></i>
+                        </Link>
                     </div>
         </div>
     })

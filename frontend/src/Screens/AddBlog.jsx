@@ -1,17 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 const AddBlog = () => {
+  const {blogID}=useParams()
   const [blogObj, setBlogObj] = useState({Author:"", Content:"",Category:'', Title:""})
   const [error,setError] = useState("") 
   const [success,setSuccess] = useState("")
+  useEffect(()=>{
+    const getBlogData = async(id) =>{
+      await axios.post("http://localhost:3001/fetchBlogById",{id:blogID})
+      .then(res=>setBlogObj(res.data.data))
+      .catch(err=>console.log(err))
+    }
+    getBlogData();
+  },[blogID])
   const changeHandler = (e) =>{
     let ename = e.target.name;
     setBlogObj({...blogObj, [ename]:e.target.value})
   }
   const submitHandler = async (e) =>{
-    let choice = window.confirm("You can make changes to your blog later as well.Are you sure you want to post this blog?")
+    let choice = window.confirm(blogID?"Are you sure you want to update this blog?":"You can make changes to your blog later as well.Are you sure you want to post this blog?")
     e.preventDefault();
-    choice&&await axios.post("http://localhost:3001/addBlog",blogObj).then((res)=>{
+    !blogID&&choice&&await axios.post("http://localhost:3001/addBlog",blogObj).then((res)=>{
+      setSuccess(res.data.msg)
+      setError("")
+      setBlogObj({Author:"", Content:"",Category:'', Title:""})
+    }).catch(err=>{
+      setError(err.response.data.msg)
+      setSuccess("")
+    })
+    blogID&&choice&&await axios.post("http://localhost:3001/updateBlog",blogObj).then((res)=>{
       setSuccess(res.data.msg)
       setError("")
       setBlogObj({Author:"", Content:"",Category:'', Title:""})
@@ -32,11 +50,11 @@ const AddBlog = () => {
       </div>}
         <div className="mt-3 input-group input-group-lg">
         <span className="input-group-text" id="inputGroup-sizing-lg" style={{width:"7.3rem"}}>Title</span>
-        <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value={blogObj.Title} onChange={(e)=>changeHandler(e)} name="Title" />
+        <input type="text" className="form-control" readOnly={blogID} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value={blogObj.Title} onChange={(e)=>changeHandler(e)} name="Title" />
         </div>
         <div className=" mt-5 input-group input-group-lg">
         <span className="input-group-text" id="inputGroup-sizing-lg" style={{width:"7.3rem"}}>Author</span>
-        <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value={blogObj.Author} onChange={(e)=>changeHandler(e)} name="Author" />
+        <input type="text" className="form-control" readOnly={blogID} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" value={blogObj.Author} onChange={(e)=>changeHandler(e)} name="Author" />
         </div>
         <div className=" mt-5 input-group input-group-lg">
         <span className="input-group-text" id="inputGroup-sizing-lg" style={{width:"7.3rem"}}>Category</span>

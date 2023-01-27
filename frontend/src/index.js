@@ -16,6 +16,7 @@ root.render(
         <Route path='/' element={<App/>}></Route>
         <Route path="/addBlog" element={<AddBlog />} />
         <Route path="/blogs/:blogID" element={<BlogDisplay />} />
+        <Route path="/addBlog/:blogID" element={<AddBlog/>} />
       </Routes>
   
     </BrowserRouter>

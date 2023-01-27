@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import "../Styles/blogDisplay.css"
 const BlogDisplay = () => {
     const {blogID} = useParams()
     const [blog,setBlog] = useState({})
     useEffect(() => {
       getBlogData();
+       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
     const getBlogData = async(id) =>{
@@ -15,7 +16,8 @@ const BlogDisplay = () => {
       .catch(err=>console.log(err))
     }
   return (
-    <div>
+   <div className='imageHere'>
+ <div className='blogContainer'>
     <div class="scroll">
         <h1 class="header">{blog?.Title}</h1>
         <div class="splitscreen">
@@ -29,7 +31,7 @@ const BlogDisplay = () => {
 
             <div class="right">
             <i class="fa-brands fa-github"></i>
-            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-twitter"></i>
             <i class="fa-brands fa-linkedin"></i>
             </div>
         </div>
@@ -43,13 +45,13 @@ const BlogDisplay = () => {
 
     </div>
     <footer class="footer">
-        <div class="footer-header">Share your thoughts now!</div>
+        <Link to="/addBlog" class="footer-header">Share your thoughts now!</Link>
         <ul class="social-links list-non-bullet">
             <li class="list-item-inline">
               <i class="fa-brands fa-github"></i>
             </li>
             <li class="list-item-inline">
-              <i class="fa-brands fa-github"></i>
+              <i class="fa-brands fa-twitter"></i>
             </li>
             <li class="list-item-inline">  
               <i class="fa-brands fa-linkedin"></i>
@@ -59,6 +61,7 @@ const BlogDisplay = () => {
     </footer>
     
 </div>
+   </div>
   )
 }
 
